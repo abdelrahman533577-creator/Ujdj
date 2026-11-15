@@ -1,10 +1,492 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <title>Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little World ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #120d1b;
+  color: #fff;
+  font-family: Arial, Tahoma, sans-serif;
+}
+
+header {
+  text-align: center;
+  padding: 30px 10px;
+}
+
+header h1 {
+  color: #ff91bd;
+  font-size: 30px;
+}
+
+header p {
+  color: #cbbbd5;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 15px 15px 110px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.card {
+  background: #21192d;
+  border: 1px solid #493454;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+h2 {
+  color: #d7aaff;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(100deg,#ff83b7,#bd91ff);
+  color: #24132c;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #60466e;
+  background: #130e1b;
+  color: white;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 12px;
+}
+
+.timer {
+  text-align: center;
+}
+
+.counter {
+  color: #ff91bd;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1c1425;
+  border-top: 1px solid #493454;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 3px;
+}
+
+nav button {
+  background: transparent;
+  color: white;
+  font-size: 12px;
+  padding: 10px 6px;
+  margin: 0;
+}
+
+nav button.active {
+  background: #493052;
+  color: #ffb5d2;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
+  gap: 10px;
+}
+
+.photos img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.message {
+  background: #382942;
+  padding: 13px;
+  border-radius: 12px;
+  margin: 10px 0;
+  white-space: pre-wrap;
+}
+
+.note {
+  color: #b9a9c5;
+  font-size: 13px;
+  line-height: 1.7;
+}
+</style>
 </head>
-<body style="background:#222;color:white;text-align:center;padding:50px">
-  <h1>HELLO MOHRA ❤️</h1>
-  <p>الموقع شغال تمام</p>
+
+<body>
+
+<header>
+  <div style="font-size:35px">💗✨💗</div>
+  <h1>Our Little World</h1>
+  <p>حكايتنا الصغيرة اللي بنحبها</p>
+</header>
+
+<main>
+
+<!-- الرئيسية -->
+<section id="home" class="page active">
+
+  <div class="card" style="text-align:center;padding:35px 15px">
+    <div style="font-size:55px">🌷</div>
+    <h2>أهلاً بعالمنا الصغير</h2>
+    <p>كل لحظة حلوة ليها حكاية، ودي مساحتنا اللي بنجمع فيها ذكرياتنا ❤️</p>
+  </div>
+
+  <div class="card">
+    <h2>حكايتنا فيها إيه؟</h2>
+    <p>⏳ عدادات ذكرياتنا</p>
+    <p>📸 صورنا الحلوة</p>
+    <p>💌 رسايل من القلب</p>
+    <p>🎮 لعبة أسئلة صغيرة</p>
+  </div>
+
+</section>
+
+<!-- الوقت -->
+<section id="time" class="page">
+
+  <div class="card">
+    <h2>⏳ عدادات حكايتنا</h2>
+
+    <div class="grid">
+
+      <div class="card timer">
+        <h2>أول مرة اتكلمنا</h2>
+        <input type="datetime-local" id="talkDate">
+        <div class="counter" id="talkCount">
+          اختار التاريخ ❤️
+        </div>
+      </div>
+
+      <div class="card timer">
+        <h2>أول مرة شوفتها</h2>
+        <input type="datetime-local" id="meetDate">
+        <div class="counter" id="meetCount">
+          اختار التاريخ ❤️
+        </div>
+      </div>
+
+    </div>
+
+    <button onclick="saveDates()">حفظ التواريخ</button>
+    <p class="note">العداد بيحسب الأيام والساعات والدقائق والثواني.</p>
+  </div>
+
+</section>
+
+<!-- الصور -->
+<section id="gallery" class="page">
+
+  <div class="card">
+    <h2>📸 معرض الصور</h2>
+    <p class="note">اختار صور من جهازك عشان تظهر في المعرض.</p>
+
+    <input type="file" id="photoInput" accept="image/*" multiple>
+
+    <div class="photos" id="photos"></div>
+  </div>
+
+</section>
+
+<!-- الرسائل -->
+<section id="messages" class="page">
+
+  <div class="card">
+    <h2>💌 رسايل صغيرة</h2>
+
+    <textarea id="messageInput"
+      placeholder="اكتب رسالة حلوة هنا..."></textarea>
+
+    <button onclick="addMessage()">احفظ الرسالة</button>
+
+    <div id="messageList"></div>
+  </div>
+
+</section>
+
+<!-- اللعبة -->
+<section id="game" class="page">
+
+  <div class="card">
+    <h2>🎮 لعبة أسئلة</h2>
+
+    <h3 id="question"></h3>
+
+    <div id="answers"></div>
+
+    <p id="quizResult"></p>
+
+    <button onclick="nextQuestion()">السؤال اللي بعده</button>
+  </div>
+
+</section>
+
+</main>
+
+<!-- شريط التنقل -->
+<nav>
+
+  <button class="active" onclick="showPage('home',this)">
+    🏠 الرئيسية
+  </button>
+
+  <button onclick="showPage('time',this)">
+    ⏳ الوقت
+  </button>
+
+  <button onclick="showPage('gallery',this)">
+    📸 الصور
+  </button>
+
+  <button onclick="showPage('messages',this)">
+    💌 الرسائل
+  </button>
+
+  <button onclick="showPage('game',this)">
+    🎮 اللعبة
+  </button>
+
+</nav>
+
+<script>
+
+// التنقل بين الصفحات
+function showPage(id,button) {
+
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
+}
+
+
+// حفظ التواريخ
+function saveDates() {
+
+  localStorage.setItem('talkDate',talkDate.value);
+  localStorage.setItem('meetDate',meetDate.value);
+
+  updateTimers();
+
+  alert('تم حفظ التواريخ ❤️');
+}
+
+
+// حساب الوقت
+function elapsed(date) {
+
+  if (!date) return 'اختار التاريخ ❤️';
+
+  let diff = Date.now() - new Date(date).getTime();
+
+  if (diff < 0) return 'التاريخ لم يأتِ بعد';
+
+  let days = Math.floor(diff / 86400000);
+  let hours = Math.floor(diff / 3600000) % 24;
+  let minutes = Math.floor(diff / 60000) % 60;
+  let seconds = Math.floor(diff / 1000) % 60;
+
+  return `${days} يوم<br>${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+}
+
+
+function updateTimers() {
+
+  talkCount.innerHTML = elapsed(talkDate.value);
+  meetCount.innerHTML = elapsed(meetDate.value);
+
+}
+
+
+talkDate.value = localStorage.getItem('talkDate') || '';
+meetDate.value = localStorage.getItem('meetDate') || '';
+
+updateTimers();
+
+setInterval(updateTimers,1000);
+
+
+// الرسائل
+function addMessage() {
+
+  let value = messageInput.value.trim();
+
+  if (!value) return;
+
+  let messages = JSON.parse(
+    localStorage.getItem('ourMessages') || '[]'
+  );
+
+  messages.unshift(value);
+
+  localStorage.setItem(
+    'ourMessages',
+    JSON.stringify(messages)
+  );
+
+  messageInput.value = '';
+
+  renderMessages();
+
+}
+
+
+function renderMessages() {
+
+  let messages = JSON.parse(
+    localStorage.getItem('ourMessages') || '[]'
+  );
+
+  messageList.innerHTML = '';
+
+  messages.forEach(message => {
+
+    let div = document.createElement('div');
+
+    div.className = 'message';
+
+    div.textContent = message;
+
+    messageList.appendChild(div);
+
+  });
+
+}
+
+renderMessages();
+
+
+// الصور
+photoInput.addEventListener('change',function(event) {
+
+  Array.from(event.target.files).forEach(file => {
+
+    let image = document.createElement('img');
+
+    image.src = URL.createObjectURL(file);
+
+    photos.appendChild(image);
+
+  });
+
+});
+
+
+// لعبة الأسئلة
+const questions = [
+
+  {
+    q: 'إيه أكتر حاجة بتفرحك؟',
+    answers: ['الاهتمام ❤️','الخروجات 🌷','الكلام الحلو 💌']
+  },
+
+  {
+    q: 'لو عندنا يوم فاضي نعمل إيه؟',
+    answers: ['نتمشى سوا','نتفرج على فيلم','نجرب مكان جديد']
+  },
+
+  {
+    q: 'اختاري لون عالمنا؟',
+    answers: ['وردي','بنفسجي','كل الألوان']
+  }
+
+];
+
+let questionIndex = 0;
+
+
+function loadQuestion() {
+
+  let current = questions[questionIndex];
+
+  question.innerText = current.q;
+
+  answers.innerHTML = '';
+
+  current.answers.forEach(answer => {
+
+    let button = document.createElement('button');
+
+    button.innerText = answer;
+
+    button.style.display = 'block';
+    button.style.width = '100%';
+
+    button.onclick = function() {
+      quizResult.innerText = 'اختيار جميل! ❤️';
+    };
+
+    answers.appendChild(button);
+
+  });
+
+}
+
+
+function nextQuestion() {
+
+  questionIndex++;
+
+  if (questionIndex >= questions.length) {
+    questionIndex = 0;
+  }
+
+  quizResult.innerText = '';
+
+  loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
 </body>
 </html>
